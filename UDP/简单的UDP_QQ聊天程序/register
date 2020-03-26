@@ -1,0 +1,79 @@
+import javax.swing.*;
+import java.sql.*;
+
+public class register extends Thread {
+    private static JFrame f = new JFrame("注册界面");
+    private static JPanel jp = new JPanel();
+    private static JTextField User_field = new JTextField();
+    private static JTextField Pwd_field = new JTextField();
+    private static JButton register_button = new JButton("注册");
+    private static Statement s;
+    private static Connection c;
+
+    public register() {
+    }
+
+    @Override
+    public void run() {
+        //UI
+        UI();
+        //事件处理
+        register_button.addActionListener(e -> {
+            connect_mysql();
+        });
+
+    }
+
+    private static void UI() {
+        jp.setLayout(null);
+        JLabel label = new JLabel("用户名");
+        JLabel label1 = new JLabel("密码");
+        label.setBounds(30, 30, 100, 40);
+        label1.setBounds(30, 100, 100, 40);
+        User_field.setBounds(160, 30, 200, 40);
+        Pwd_field.setBounds(160, 100, 200, 40);
+        register_button.setBounds(280, 200, 100, 40);
+        jp.add(label);
+        jp.add(label1);
+        jp.add(User_field);
+        jp.add(Pwd_field);
+        jp.add(register_button);
+        f.add(jp);
+        f.setBounds(0, 0, 400, 400);
+        f.setVisible(true);
+    }
+
+    private static void connect_mysql() {
+        //连接数据库
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Java?characterEncoding=utf8&useSSL=false&serverTimezone=UTC",
+                    "root", "123456");
+            //JOptionPane.showMessageDialog(null, "数据库连接成功", "提示", JOptionPane.INFORMATION_MESSAGE);
+            s = c.createStatement();
+            //System.out.println("获取Statement对象：" + s);
+            String sql = "insert into user_list values(null," + "'" + User_field.getText() + "','" + Pwd_field.getText() + "')";
+            s.execute(sql);
+            f.dispose();
+            JOptionPane.showMessageDialog(null, "注册成功", "提示", JOptionPane.INFORMATION_MESSAGE);
+        } catch (ClassNotFoundException | SQLException e3) {
+            e3.printStackTrace();
+            JOptionPane.showMessageDialog(null, "数据库连接失败，注册失败", "提示", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            if (s != null)
+                try {
+                    s.close();
+                } catch (SQLException e2) {
+                    e2.printStackTrace();
+                }
+
+            if (c != null) {
+                try {
+                    c.close();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+    }
+}
