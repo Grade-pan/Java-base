@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="CSS/register.css">
+    <style>
+        body {
+            background: url("picture/rejister.jpg") no-repeat center fixed;
+        <!-- 目的：兼容性 --> -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+    </style>
+</head>
+<body>
+<script language="JavaScript">
+    function checkPhone() {
+        var phone = document.getElementById('phone').value;
+        if (!(/^1[3456789]\d{9}$/.test(phone))) {
+            document.getElementById("phone").value = "";
+            document.getElementById("phone").placeholder = "输入的手机号有误,重新输入";
+            return false;
+        }
+    }
+</script>
+<script>
+    function regEmail() {
+        var email = document.getElementById("email").value;
+        if (!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(email)) {
+            document.getElementById("email").value = "";
+            document.getElementById("email").placeholder = "邮箱格式错误，重新输入";
+            return false;
+        }
+    }
+</script>
+<script>
+    function ReSubmit() {
+        var userText = document.getElementById("user").value;
+        var userPassword = document.getElementById("password").value;
+        var userTelephone = document.getElementById("phone").value;
+        var userEmail = document.getElementById("email").value;
+        if (userText.length === 0) {
+            alert("用户名不能为空");
+            document.getElementById("formSubmit").action = "";
+            return;
+        }
+        var Message = {
+            "用户名": userText,
+            "密码": userPassword,
+            "电话": userTelephone,
+            "邮箱": userEmail
+        };
+        var MessageJson = JSON.stringify(Message);
+        alert("您填报的个人信息--------" + MessageJson)
+
+    }
+</script>
+<p class="pFirst">欢迎注册云端笔记</p>
+<p class="pSecond">每一天都在分享精彩故事</p>
+<div class="div">
+    <form method="post" action="/JSPTEST2_war_exploded/Login" id="formSubmit">
+        <input type="text" class="inputUser" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"
+               onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))"
+               placeholder="请输入用户名，只能输入中文" name="userText" id="user">
+        <br>
+        <input type="password" class="inputPassword" minlength="6" maxlength="12" placeholder="请输入密码"
+               name="PasswordText" id="password">
+        <br>
+        <input type="tel" class="inputTelephone" maxlength="11" minlength="11" placeholder="请输入手机号码"
+               onmouseout="checkPhone()" id="phone" name="TelephoneText">
+        <input type="email" class="inputEmail" placeholder="请输入邮箱" id="email" onmouseout="regEmail()" name="EmailText">
+        <input type="submit" value="提交" class="inputRegister" onclick="ReSubmit()">
+    </form>
+</div>
+
+</body>
+</html>

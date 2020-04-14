@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .datalist {
+            border: 1px solid #429fff; /* 表格边框 */
+            font-family: Arial;
+            border-collapse: collapse; /* 边框重叠 */
+        }
+        .datalist tr:hover {
+            background-color: #c4e4ff; /* 动态变色,IE6下无效！*/
+        }
+        .datalist caption {
+            padding-top: 3px;
+            padding-bottom: 2px;
+            font-family: bold;
+            background-color: #f0f7ff;
+            border: 1px solid #429fff; /* 表格标题边框 */
+        }
+        .datalist th {
+            border: 1px solid #429fff; /* 行、列名称边框 */
+            background-color: #d2e8ff;
+            font-weight: bold;
+            padding: 4px 10px;
+            text-align: center;
+        }
+        .datalist td {
+            border: 1px solid #429fff; /* 单元格边框 */
+            text-align: right;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<table class="datalist">
+    <tr>
+        <th>文件名称</th>
+        <th>文件类型</th>
+        <th>下载</th>
+    </tr>
+    <tr>
+        <th>QQ浏览器截图20200407205816.png</a></th>
+        <th>.png</th>
+        <th><a href="/JSPTEST2_war_exploded/downlandFile?filename=QQ浏览器截图20200407205816.png"/>下载</th>
+    </tr>
+    <tr>
+        <th>2222222.txt</th>
+        <th>.txt</th>
+        <th><a href="/JSPTEST2_war_exploded/downlandFile?filename=2222222.txt">下载</a></th>
+    </tr>
+</table>
+
+</body>
+</html>

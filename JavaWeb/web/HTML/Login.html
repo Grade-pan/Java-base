@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<head xmlns:ime-mode="http://www.w3.org/1999/xhtml" xmlns:ime-mode="http://www.w3.org/1999/xhtml">
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background: url("picture/kaishi.jpg") no-repeat center fixed;
+        <!-- 目的：兼容性 --> -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="CSS/Login.css">
+    <link rel="stylesheet" type="text/css" href="CSS/Start.css">
+</head>
+
+<body>
+<ul>
+    <li><a class="text" href="https://www.liaoxuefeng.com/wiki/1252599548343744">Java</a></li>
+    <li><a class="text" href="https://www.liaoxuefeng.com/wiki/1016959663602400">Python</a></li>
+    <li><a class="text" href="http://c.biancheng.net/">C</a></li>
+    <li><a class="text" href="http://c.biancheng.net/">C#</a></li>
+    <li><a class="text" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript">JavaScript</a></li>
+    <li><a class="text" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML">HTML</a></li>
+    <li><a class="text" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS">CSS</a></li>
+    <li><a class="text" href="https://www.django.cn/">Django</a></li>
+    <li><a class="text" href="https://cn.vuejs.org/">Vue.js</a></li>
+    <li><a class="text" href="https://spring.io/projects/spring-boot">Spring Boot</a></li>
+    <li><a class="text" href="http://c.biancheng.net/spring_mvc/">Spring MVC</a></li>
+    <li><a class="text" href="https://spring.io/">Spring</a></li>
+    <li><a class="text" href="https://netty.io/">Netty</a></li>
+</ul>
+<style>
+    a.fancy:link, a.fancy:visited {
+        text-decoration: underline;
+        color: #16ff18;
+    }
+
+    a.fancy:hover, a.fancy:active {
+        background-color: #0e23ff;
+    }
+</style>
+<p>每一段记忆，都有一个密码。只要时间，地点，人物组合正确，无论尘封多久，那人那景都将在遗忘中重新拾起。
+    今天从这里分享你的故事，点击<a class="fancy" href="note.html">分享</a>前往云的彼端，分享你的精彩人生！</p>
+<form>
+    <fieldset>
+        <legend>功能区</legend>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <a class="fancy"
+           href="mailto:sample@fly63.com?subject=test&cc=sample@hotmail.com&subject=主题&body=内容">Windows邮件</a>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <a class="fancy" href="https://mail.qq.com/">QQ邮箱</a>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <a class="fancy" href="https://mail.163.com/">163邮箱</a>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <a class="fancy" href="http://www.diyiziti.com/">在线字体</a>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <a class="fancy" href="http://www.html22.com/doc/">网页转换</a>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <a class="fancy" href="https://www.sq688.com/">无损音乐</a>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <a class="fancy" href="http://pic.netbian.com/">4K壁纸</a>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <a class="fancy" href="http://www.languang.co/?btwaf=44659410">蓝光电影</a>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <a class="fancy" href="https://sukebei.nyaa.net/">学习资料</a>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <a class="fancy" href="http://www.bigpixel.cn/city.html">千亿像素看中国</a>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <a class="fancy" href="http://www.cssmoban.com/tags.asp?n=html">精品模板</a>
+    </fieldset>
+</form>
+<p class="pFirst">登录云端笔记，分享你的精彩人生</p>
+<p class="pSecond">红笺小字</p>
+<p class="pSecond">说尽平生意</p>
+<p class="pSecond">鸿雁在云鱼在水</p>
+<p class="pSecond">惆怅此情难寄</p>
+<p class="pSecond">斜阳独倚西楼</p>
+<p class="pSecond">遥山恰对帘钩</p>
+<p class="pSecond">人面不知何处</p>
+<p class="pSecond">绿波依旧东流</p>
+<div class="div1">欢迎登录云端笔记</div>
+<div class="divLogin">
+    <form method="post" action="/JSPTEST2_war_exploded/HTML/note.html">
+        <input type="text" name="user" class="inputUser" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"
+               onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))"
+               placeholder="请输入用户名，只能输入中文" id="userName">
+        <input type="password" name="password" class="inputPassword" placeholder="请输入密码" minlength="6" maxlength="12">
+        <input type="checkbox" name="auto" class="inputAuto">
+        <label class="label">下次自动登录</label>
+        <input type="submit" name="submit" class="inputSubmit" value="登录">
+    </form>
+    <p class="p"><a href="register.html">注册账号</a></p>
+    <p class="p1"><a href="">忘记密码</a></p>
+</div>
+</body>
+</html>

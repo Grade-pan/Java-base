@@ -1,0 +1,80 @@
+.div1 {
+    position: absolute;
+    left: 860px;
+    top: 270px;
+    width: 330px;
+    height: 50px;
+    /*border: 1px solid #3e7dff;*/
+    line-height: 50px;
+    text-align: center;
+    color: #0e23ff;
+}
+
+
+.divLogin {
+    position: absolute;
+    left: 880px;
+    top: 300px;
+    width: 330px;
+    height: 330px;
+    /*border: 1px solid #3a75ff;*/
+}
+
+
+.inputUser {
+    position: relative;
+    left: 10px;
+    top: 40px;
+    width: 250px;
+    border-radius: 3px;
+    padding: 10px 40px 10px 10px;
+    border: 1px solid #3a75ff;
+}
+
+.inputPassword {
+    position: relative;
+    left: 10px;
+    top: 80px;
+    width: 250px;
+    border-radius: 3px;
+    padding: 10px 40px 10px 10px;
+    border: 1px solid #3a75ff;
+}
+
+.inputAuto {
+    position: relative;
+    left: -300px;
+    top: 140px;
+}
+
+.label {
+    font-size: 12px;
+    position: relative;
+    left: 40px;
+    top: 110px;
+}
+
+.inputSubmit {
+    position: relative;
+    left: 10px;
+    top: 140px;
+    width: 300px;
+    border-radius: 3px;
+    padding: 10px 40px 10px 10px;
+    border: 1px solid #3a75ff;
+    background-color: #42f3ff;
+}
+
+.p {
+    font-size: 12px;
+    position: relative;
+    left: 10px;
+    top: 150px;
+}
+
+.p1 {
+    font-size: 12px;
+    position: relative;
+    left: 270px;
+    top: 125px;
+}
