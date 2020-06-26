@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>快捷发送新闻</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-weight: 500;
+        font-family: "Microsoft YaHei", "宋体", "Segoe UI", "Lucida Grande", Helvetica, Arial, sans-serif, FreeSans, Arimo;
+    }
+
+    div.search {
+        padding: 10px 0;
+    }
+
+    form {
+        position: relative;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    input, button {
+        border: none;
+        outline: none;
+    }
+
+    input {
+        width: 100%;
+        height: 42px;
+        padding-left: 13px;
+    }
+
+    button {
+        height: 42px;
+        width: 42px;
+        cursor: pointer;
+        position: absolute;
+    }
+
+
+    .bar form {
+        height: 42px;
+    }
+
+    .bar input {
+        width: 90%;
+        border-radius: 42px;
+        border: 2px solid #324B4E;
+        background: white;
+        transition: .3s linear;
+        float: right;
+    }
+
+    .bar input:focus {
+        width: 95%;
+    }
+
+    .bar button {
+        background: none;
+        top: -2px;
+        right: 20px;
+    }
+
+    .bar button:before {
+        content: "Search";
+        font-family: FontAwesome;
+        color: #324b4e;
+    }
+
+    .button-send {
+        width: 100%;
+        height: 30px;
+        color: white;
+        background-color: cornflowerblue;
+        border-radius: 3px;
+        border-width: 0;
+        margin: 0;
+        outline: none;
+        font-family: KaiTi;
+        font-size: 17px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .button-send:hover {
+        background-color: #29fa17;
+    }
+
+
+</style>
+</head>
+<body>
+<div id="container">
+    <div class="search bar">
+        <form action="javascript:void (0)">
+            <input type="text" placeholder="请输入newsID,newsID从辅助查询中获取" id="newsID" autocomplete="off">
+            <button id="search"></button>
+        </form>
+    </div>
+</div>
+
+<div id="newsShow" style="font-family: KaiTi">
+    <h1 style="text-align: center" id="title"></h1>
+    <h4 style="text-align: right" id="source"></h4>
+    <img src="" id="img" align="center" style=" margin:0 auto; display:block;">
+</div>
+<div id="newsSend">
+    <button class="button-send" id="sendNews" style="display: none">发送新闻</button>
+</div>
+</body>
+
+
+<script>
+    var title;
+    var author;
+    var imgUrl;
+    var content;
+    var postTime;
+    $('#search').click(function () {
+        var newsID = $('#newsID').val();
+        console.log(newsID)
+        $.get('https://www.mxnzp.com/api/news/details?newsId=' + newsID + '&app_id=sngmqkqxuln6jkik&app_secret=RVV0aDBJbnpIa2k3REdVQmNuaWI2dz09', function (data, status) {
+            if (typeof data.data === "undefined") {
+                $('#title').html("当前newsID无效请更换newsID")
+            } else {
+                title = data.data.title;
+                author = data.data.source;
+                imgUrl = data.data.cover;
+                content = data.data.content;
+                postTime = data.data.ptime;
+                $('#title').html(title);
+                $('#source').html(author + "    " + postTime);
+                $('#img').attr("src", imgUrl);
+                $('#newsShow').after(content);
+                $('#sendNews').attr("style", "display:block;")
+
+                var news = {
+                    'title': title,
+                    'author': author,
+                    'imgUrl': imgUrl,
+                    'content': content,
+                    'postTime': postTime
+                };
+                //显示按钮
+                $('#sendNews').click(function () {
+                    $.ajax({
+                        url: 'http://localhost:8080/quickNews',
+                        data: JSON.stringify(news),
+                        type:'post',
+                        dataTy: 'json',
+                        async: 'false',
+                        success: function (data) {
+                            if (data.code == "200") {
+                                alert(data.messages)
+                            } else {
+                                alert(data.messages)
+                            }
+                        },
+                        error: function (data) {
+                            alert("服务器异常")
+                        }
+                    });
+
+                })
+            }
+        })
+    });
+
+
+</script>
+</html>

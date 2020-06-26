@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>新闻发布</title>
+    <link rel="stylesheet" href="../CSS/bootstrap.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.7/umd/popper.min.js"></script>
+<!--    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>-->
+    <script rel="script" type="text/javascript" src="../JS/bootstrap.js"></script>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <style>
+        .file {
+            display: inline-block;
+            background: #D0EEFF;
+            border: 1px solid #99D3F5;
+            border-radius: 4px;
+            padding: 4px 12px;
+            overflow: hidden;
+            color: #1E88C7;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 20px;
+        }
+
+        .file input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        .file:hover {
+            background: #AADFFD;
+            border-color: #78C3F3;
+            color: #004974;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <script src="../layui/layui.all.js" charset="utf-8"></script>
+        <h1 style="font-size:18px;font-weight:bold;background-color: #CEEEFA;border-bottom: 1px solid;padding: 5px 15px;border-left: 8px solid;margin:18px 0px 18px -20px;overflow: hidden;
+text-align: center;color:blue">新闻发布</h1>
+        <form class="" role="form" enctype="multipart/form-data" id="news-form">
+            <div class="form-group col-lg-12">
+                <div class="input-group">
+                    <span class="input-group-addon">新闻标题</span>
+                    <input class="form-control" type="text" name="title" id="title">
+                </div>
+            </div>
+            <div class="form-group col-lg-12">
+                <div class="input-group">
+                    <span class="input-group-addon">作者</span>
+                    <input class="form-control" type="text" name="author" id="author">
+                </div>
+            </div>
+            <div class="form-group col-lg-12">
+                <div class="input-group">
+                    <span class="input-group-addon">日期</span>
+                    <input class="form-control" type="date" name="date" id="date">
+                </div>
+            </div>
+            <div class="form-group col-lg-12">
+                <div class="input-group">
+                    <span class="input-group-addon">新闻类型</span>
+                    <select class="form-control" name="type" id="type">
+                        <option value="财经">财经</option>
+                        <option value="科技">科技</option>
+                        <option value="军事">军事</option>
+                        <option value="时尚">时尚</option>
+                        <option value="NBA">NBA</option>
+                        <option value="股票">股票</option>
+                        <option value="游戏">游戏</option>
+                        <option value="健康">健康</option>
+                        <option value="知否">知否</option>
+                        <option value="要闻">要闻</option>
+                        <option value="体育">体育</option>
+                        <option value="娱乐">娱乐</option>
+                        <option value="头条">头条</option>
+                        <option value="热点">热点</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-12">
+                <span class="input-group-addon">新闻内容</span>
+                <textarea class="form-control" rows="6" name="content" id="content"></textarea>
+            </div>
+            <div class="form-group col-lg-12">
+                <span class="input-group-addon">选择配图</span>
+                <label for="upload" class="file">选择图片</label>
+                <input type="file" id="upload" name="picture" style="display: none" class="inputFile">
+                <img class="showImg" alt="请选择图片" style="width:500px;height:300px"/>
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" onclick="saveFrom()" style="position:absolute;left:60%">发送新闻</button>
+            </div>
+        </form>
+<script>
+    layui.use('element', function () {
+        var element = layui.element;
+    });
+
+    function getFileURL(file) {
+        let getUrl = null;
+        if (window.createObjectURL !== undefined) {
+            getUrl = window.createObjectURL(file);
+        } else if (window.URL !== undefined) {
+            getUrl = window.URL.createObjectURL(file);
+        } else if (window.webkitURL !== undefined) {
+            getUrl = window.webkitURL.createObjectURL(file);
+        }
+        return getUrl;
+    }
+
+    let fileElement = document.querySelector(".inputFile");
+    let imgElement = document.querySelector(".showImg");
+    fileElement.onchange = function () {
+        let url = getFileURL(fileElement.files[0]);
+        imgElement.setAttribute("src", url);
+        imgElement.setAttribute('alt', url);
+    };
+
+    function saveFrom() {
+        var data = new FormData();
+        data.append('title', $('#title').val());
+        data.append('author', $('#author').val());
+        data.append('date', $('#date').val());
+        data.append('type', $('#type').val());
+        data.append('content', $('#content').val());
+        data.append('file', $('#upload').get(0).files[0]);
+        $.ajax({
+            type: 'post',
+            url: 'http://localhost:8080/newsSend',
+            data: data,
+            contentType: false,
+            processData: false,
+            cash: 'false',
+            success: function (data) {
+                if (data.code == "200") {
+                    alert(data.messages)
+                } else {
+                    alert(data.messages)
+                }
+            },
+            error: function () {
+                alert("服务器出了点问题")
+            }
+        })
+    }
+</script>
+</body>
+</html>

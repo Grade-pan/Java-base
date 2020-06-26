@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="pxy">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>个人信息</title>
+    <script src="https://cdn.staticfile.org/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+</head>
+<body>
+<form class="layui-form" lay-filter="formDemo">
+    <div class="layui-form-item">
+        <label class="layui-form-label">昵称</label>
+        <div class="layui-input-block" style="width:60%">
+            <input type="text" name="nicheng" placeholder="请输入" autocomplete="off" class="layui-input"
+                   value="pxy"
+                   lay-verify=" required" id="nicheng">
+        </div>
+        <label class="layui-form-label">邮箱</label>
+        <div class="layui-input-block" style="width: 60%">
+            <input type="email" name="email" placeholder="请输入" autocomplete="off" class="layui-input"
+                   value="1817865166@qq.com" required lay-verify="email" id="email">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">爱好</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="write" title="写作" checked>
+            <input type="checkbox" name="read" title="阅读" checked>
+            <input type="checkbox" name="luguan" title="撸管">
+            <input type="checkbox" name="banzhuan" title="搬砖">
+            <input type="checkbox" name="pingpang" title="乒乓" checked>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-block">
+            <input type="radio" name="sex" value="男" title="男">
+            <input type="radio" name="sex" value="女" title="女">
+            <input type="radio" name="sex" value="其他" title="其他">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">个人介绍</label>
+        <div class="layui-input-block">
+            <textarea placeholder="人生最大的快乐就是做个程序员！" class="layui-textarea" name="gerenjieshao"
+                      lay-verify="required"></textarea>
+        </div>
+    </div>
+</form>
+<script src="../layui/layui.all.js"></script>
+<script>
+    var sex;
+    $(document).ready(function () {
+        console.log($('#username', parent.document).text());
+        var username = $('#username', parent.document).text();
+        $('#nicheng').val(username);
+        $.ajax({
+            url: 'http://localhost:8080/personalInformation?username=' + username,
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == "200") {
+                    $('#email').val(data.messages);
+                    sex = data.sex;
+
+                } else {
+                    $('#email').val('nothing');
+                }
+            },
+            error: function () {
+                alert("服务器错误")
+            }
+        })
+    });
+    layui.use('form', function () {
+        var form = layui.form;
+        $("input[name='sex'][value=" +sex + "]").attr("checked", true);
+        form.render();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" name="author" content="pxy">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>SWP后台管理系统</title>
+    <script type="text/javascript" src="../JS/timecountdown.js"></script>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script type="text/javascript" src="../JS/Iframe.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body class="layui-layout-body">
+<div id="rootMessage">
+</div>
+<div class="layui-layout layui-layout-admin" id="rootDiv">
+    <div class="layui-header">
+        <div class="layui-logo">SWP后台管理系统</div>
+        <ul class="layui-nav layui-bg-blue layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:">
+                    <img src="../layui/images/LOGO/head.png" class="layui-nav-img">
+                    <span id="username"></span>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:void (0)" onclick="MenuClick('PersonalInformational.html',this)">基本资料</a>
+                    </dd>
+                    <dd><a href="javascript:void(0)" onclick="logOut()">退出</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item"><a href="javascript:void(0)"
+                                              onclick="MenuClick('FirstPage.html',this)">后台首页</a></li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="MenuFA" href="javascript:void(0)">辅助查询</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:void (0)"
+                               onclick="MenuClick('BackstageSupporterData/IPShow.html',this)">IP查询</a></dd>
+                        <dd><a href="javascript:void(0)"
+                               onclick="MenuClick('BackstageSupporterData/WeatherShow.html',this)">天气查询</a></dd>
+                        <dd><a href="javascript:void(0)"
+                               onclick="MenuClick('BackstageSupporterData/newsShow.html'),this">新闻查询</a></dd>
+                        <dd><a href="BackstageSupporterData/404.html">404模板</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="javascript:void(0)"
+                                              onclick="MenuClick('WebDaily.html',this)">网站日志</a></li>
+                <li class="layui-nav-item"><a href="javascript:void(0)"
+                                              onclick="MenuClick('userTable.html',this)">用户管理</a></li>
+                <li class="layui-nav-item"><a href="javascript:void(0)"
+                                              onclick="MenuClick('newsManger.html',this)">新闻管理</a></li>
+                <li class="layui-nav-item"><a href="javascript:void(0)"
+                                              onclick="MenuClick('NewsSend.html',this)">新闻发布</a></li>
+                <li class="layui-nav-item"><a href="javascript:void(0)"
+                                              onclick="MenuClick('quickSendNews.html',this)">一键发布新闻</a></li>
+                <li class="layui-nav-item"><a href="javascript:void(0)"
+                                              onclick="MenuClick('http://localhost:8080/druid',this)">数据连接池</a></li>
+                <li class="layui-nav-item"><a href="javascript:void(0)"
+                                              onclick="MenuClick('Configure.html',this)">网站配置</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-body">
+        <div class="layadmin-tabsbody-item layui-show ">
+            <iframe src="FirstPage.html" frameborder="0" class="layadmin-iframe" width="100%"
+                    id="iframeMain">
+            </iframe>
+        </div>
+    </div>
+</div>
+</div>
+<script src="../layui/layui.all.js"></script>
+<script>
+    $(window).on('resize', function () {
+        AdminInit();
+        // iframe窗口自适应
+        var $content = $('#iframeMain');
+        $content.height($(this).height() - 125);
+        $content.find('iframe').each(function () {
+            $(this).height($content.height());
+        });
+    }).resize();
+
+    function AdminInit() {
+        $('.layadmin-tabsbody-item layui-show').height($(window).height());
+        $('body').height($(window).height());
+    }
+
+
+    $(document).ready(function () {
+        var rootname = "rootname";
+        console.log(getCookie(rootname));
+
+        function getCookie(NameOfCookie) {
+            if (document.cookie.length > 0) {
+                begin = document.cookie.indexOf(NameOfCookie + "=");
+                if (begin !== -1) {
+                    begin += NameOfCookie.length + 1;
+                    end = document.cookie.indexOf(";", begin);
+                    if (end === -1) end = document.cookie.length;
+                    return unescape(document.cookie.substring(begin, end));
+                }
+            }
+            return null;
+        }
+
+        $('#username').html(getCookie(rootname));
+    });
+
+
+    //退出销毁seesion
+    function logOut() {
+        $.get('http://localhost:8080/logOut', function (data) {
+            if (data.code == "200") {
+                window.location.href = "http://localhost:8080/Root/login.html"
+            } else {
+                alert("服务器错误")
+            }
+        })
+    }
+
+    layui.use('element', function () {
+        var element = layui.element;
+    });
+</script>
+</body>
+</html>

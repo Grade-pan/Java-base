@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>天气信息</title>
+    <meta name="author" content="pxy">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../layui/css/layui.css" media="all">
+</head>
+<body class="layui-layout-body">
+        <div class="demoTable">
+            <span class="layui-badge layui-bg-cyan">输</span>
+            <span class="layui-badge">入</span>
+            <span class="layui-badge layui-bg-orange">城</span>
+            <span class="layui-badge layui-bg-green">市</span>
+            <span class="layui-badge layui-bg-cyan">后</span>
+            <span class="layui-badge layui-bg-blue">点</span>
+            <span class="layui-badge layui-bg-black">击</span>
+            <span class="layui-badge layui-bg-gray">查</span>
+            <span class="layui-badge layui-bg-cyan">询</span>
+            <span class="layui-badge layui-bg-orange">按</span>
+            <span class="layui-badge layui-bg-green">钮</span>
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <div class="layui-inline">
+                <input class="layui-input" name="id" id="demoReload" autocomplete="off" placeholder="输入城市"
+                       lay-verify="required">
+            </div>
+            <span class="layui-badge layui-bg-cyan">不</span>
+            <span class="layui-badge layui-bg-blue">要</span>
+            <span class="layui-badge layui-bg-black">空</span>
+            <span class="layui-badge layui-bg-gray">查</span>
+            <span class="layui-badge layui-bg-cyan">询</span>
+            <span class="layui-badge layui-bg-orange">！</span>
+            <button class="layui-btn" data-type="reload" style="position:absolute;left: 90%">查询</button>
+        </div>
+
+        <table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
+        <table class="layui-hide" id="test" lay-filter="test"></table>
+        <script type="text/html" id="toolbarDemo">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+                <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+                <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+            </div>
+        </script>
+        <script type="text/html" id="barDemo">
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        </script>
+        <script src="../../layui/layui.all.js" charset="utf-8"></script>
+        <script>
+            layui.use('table', function () {
+                var table = layui.table;
+                table.render({
+                    elem: '#test'
+                    ,
+                    url: encodeURI('https://www.mxnzp.com/api/weather/current/洛阳市?app_id=sngmqkqxuln6jkik&app_secret=RVV0aDBJbnpIa2k3REdVQmNuaWI2dz09')
+                    ,
+                    parseData: function (res) {
+                        return {
+                            "code": 0,
+                            "msg": res.message,
+                            "count": 1,
+                            'data': new Array(res.data)
+                        };
+                    }
+                    ,
+                    toolbar: '#toolbarDemo'
+                    ,
+                    defaultToolbar: ['filter', 'exports', 'print', {
+                        title: '提示'
+                        , layEvent: 'LAYTABLE_TIPS'
+                        , icon: 'layui-icon-tips'
+                    }]
+                    ,
+                    cols: [[
+                        {type: 'checkbox', fixed: 'left'},
+                        {field: 'address', width: 200, title: '地址'}
+                        , {field: 'cityCode', width: 100, title: 'CityCode'}
+                        , {
+                            field: 'temp', width: 100, title: '温度', edit: 'text', templet: function (res) {
+                                return '<em>' + res.temp + '</em>'
+                            }
+                        }
+                        , {field: 'weather', width: 100, title: '天气'}
+                        , {field: 'windDirection', title: '风向', minWidth: 100}
+                        , {field: 'windPower', title: '风力', width: 100}
+                        , {field: 'humidity', title: '湿度'}
+                        , {field: 'reportTime', title: '预报时间', width: 300}
+                        , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150}
+                    ]]
+                    ,
+                    page: true
+                    ,
+                    id: 'testReload'
+                });
+                table.on('toolbar(test)', function (obj) {
+                    var checkStatus = table.checkStatus(obj.config.id);
+                    switch (obj.event) {
+                        case 'getCheckData':
+                            var data = checkStatus.data;
+                            layer.alert(JSON.stringify(data));
+                            break;
+                        case 'getCheckLength':
+                            var data = checkStatus.data;
+                            layer.msg('选中了：' + data.length + ' 个');
+                            break;
+                        case 'isAll':
+                            layer.msg(checkStatus.isAll ? '全选' : '未全选');
+                            break;
+
+                        case 'LAYTABLE_TIPS':
+                            layer.alert('这是工具栏右侧自定义的一个图标按钮');
+                            break;
+                    }
+                    ;
+                });
+                table.on('tool(test)', function (obj) {
+                    var data = obj.data;
+                    //console.log(obj)
+                    if (obj.event === 'del') {
+                        layer.confirm('真的删除行么', function (index) {
+                            obj.del();
+                            layer.close(index);
+                        });
+                    } else if (obj.event === 'edit') {
+                        layer.prompt({
+                            formType: 2
+                            , value: data.temp
+                        }, function (value, index) {
+                            obj.update({
+                                temp: value
+                            });
+                            layer.close(index);
+                        });
+                    }
+                });
+                var $ = layui.$, active = {
+                    reload: function () {
+                        var demoReload = $('#demoReload');
+                        //执行重载
+                        table.reload('testReload', {
+                            url: 'https://www.mxnzp.com/api/weather/current/' + demoReload.val() + '?app_id=sngmqkqxuln6jkik&app_secret=RVV0aDBJbnpIa2k3REdVQmNuaWI2dz09',
+                            page: {
+                                curr: 1
+                            }
+                            , where: {
+                                key: {
+                                    city: demoReload.val()
+                                }
+                            }
+                        }, 'data');
+                    }
+                };
+
+                $('.demoTable .layui-btn').on('click', function () {
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+            });
+        </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="author" content="pxy">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=yes"/>
+    <script type="text/javascript" src="../JS/timecountdown.js"></script>
+    <style>
+        /*用后代选择器给基础代码添加字体样式和文本样式*/
+        .demo a {
+            float: left; /*设置浮动*/
+            display: block; /*设置元素的显示属性 block 元素会被显示为块级元素*/
+            height: 50px; /*设置元素高度*/
+            width: 50px; /*设置元素宽度*/
+            border-radius: 10px; /*设置圆角边框*/
+            background: greenyellow; /*设置背景颜色*/
+            color: white; /*设置文本颜色*/
+            text-align: center; /*设置文本居中*/
+            line-height: 50px; /*设置文本行高*/
+            text-decoration: aliceblue; /*设置文本装饰*/
+            margin: 5px; /*设置外边距*/
+            font-family: "Courier New"; /*设置字体类型*/
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+    window.onload = function () {
+        xcsoft.countup('2017-09-12', function (time) {
+            document.getElementById("y2").innerHTML = time.year
+            document.getElementById("d2").innerHTML = time.day
+            document.getElementById("h2").innerHTML = time.hourZero
+            document.getElementById("i2").innerHTML = time.minuteZero
+            document.getElementById("s2").innerHTML = time.secondZero
+        })
+        setInterval(function () {
+            fnDate();
+        });
+    }
+
+    function fnDate() {
+        var time = new Date();
+        document.getElementById("year").innerHTML = time.getFullYear();
+        document.getElementById("month").innerHTML = time.getMonth() + 1;
+        document.getElementById("Date").innerHTML = time.getDate();
+        document.getElementById("hour").innerHTML = time.getHours();
+        document.getElementById("minutes").innerHTML = time.getMinutes();
+        document.getElementById("seconds").innerHTML = time.getSeconds();
+    }
+</script>
+<p class="demo">
+    <a>现</a>
+    <a>在</a>
+    <a>是</a>
+    <a>北</a>
+    <a>京</a>
+    <a>时</a>
+    <a>间</a>
+    <a id="year"></a>
+    <a>年</a>
+    <a id="month"></a>
+    <a>月</a>
+    <a id="Date"></a>
+    <a>日</a>
+    <a id="hour"></a>
+    <a>时</a>
+    <a id="minutes"></a>
+    <a>分</a>
+    <a id="seconds"></a>
+    <a>秒</a>
+</p>
+</body>
+</html>

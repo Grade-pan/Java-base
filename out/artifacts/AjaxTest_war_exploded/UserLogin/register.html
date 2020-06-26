@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>用户注册</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/my-login.css">
+    <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="bootstrapvalidator/dist/css/bootstrapValidator.css"/>
+    <script type="text/javascript" src="bootstrapvalidator/dist/js/bootstrapValidator.js"></script>
+    <link href="bootstrapvalidator/dist/css/bootstrapValidator.min.css" rel="stylesheet"/>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.7/umd/popper.min.js"></script>
+
+</head>
+<body class="my-login-page">
+<!--获取IP地址-->
+<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center h-100">
+            <div class="card-wrapper">
+                <div class="card fat">
+                    <div class="card-body">
+                        <h4 class="card-title"><span class="badge badge-success">注册</span></h4>
+                        <form method="POST" id="register-form">
+                            <div class="form-group">
+                                <label for="name"><span class="badge badge-danger">名称</span></label>
+                                <input id="name" type="text" class="form-control" name="name" required autofocus autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email"><span class="badge badge-danger">邮箱</span></label>
+                                <input id="email" type="email" class="form-control" name="email" required autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password"><span class="badge badge-danger">密码</span></label>
+                                <input id="password" type="password" class="form-control" name="password" required
+                                       data-eye autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="age"><span class="badge badge-danger">年龄</span></label>
+                                <input id="age" type="text" class="form-control" name="age" required autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="telephone"><span class="badge badge-danger">手机号</span></label>
+                                <input id="telephone" type="tel" class="form-control" name="telephone" required autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address"><span class="badge badge-danger">地址</span></a></label>
+                                <input id="address" type="text" class="form-control" name="address" required autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address"><span class="badge badge-danger">Your IP</span></label>
+                                <input id="IP" type="text" class="form-control" name="IP" autocomplete="off">
+                                <script type="text/javascript">
+                                    var ip = returnCitySN["cip"];
+                                    document.getElementById("IP").value = ip;
+                                </script>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address"><span class="badge badge-danger">性别</span></label>
+                                <select name="sex" class="form-control" id="sex">
+                                    <option>男</option>
+                                    <option>女</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label" id="captchaOperation"></label>
+                                <input type="text" class="form-control" name="captcha" autocomplete="off"/>
+                            </div>
+
+                            <div class="form-group no-margin">
+                                <button class="btn btn-primary btn-block" id="register">
+                                    Register
+                                </button>
+                            </div>
+                            <div class="margin-top20 text-center">
+                                已有账号? <a href="../index.html"><span class="badge badge-primary">Login now!</span></a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="js/user-register.js"></script>
+<script>
+
+</script>
+</body>
+</html>

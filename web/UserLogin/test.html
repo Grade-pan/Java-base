@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>getCookie</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+    var username = "username";
+    console.log(getCookie(username));
+
+    function getCookie(NameOfCookie) {
+        if (document.cookie.length > 0) {
+            begin = document.cookie.indexOf(NameOfCookie + "=");
+            if (begin !== -1) {
+                begin += NameOfCookie.length + 1;
+                end = document.cookie.indexOf(";", begin);
+                if (end === -1) end = document.cookie.length;
+                return unescape(document.cookie.substring(begin, end));
+            }
+        }
+        return null;
+    }
+</script>
+</html>

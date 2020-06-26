@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Kodinger">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="UserLogin/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="UserLogin/css/my-login.css">
+    <script src="UserLogin/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="UserLogin/bootstrapvalidator/dist/css/bootstrapValidator.css"/>
+    <script type="text/javascript" src="UserLogin/bootstrapvalidator/dist/js/bootstrapValidator.js"></script>
+    <link href="UserLogin/bootstrapvalidator/dist/css/bootstrapValidator.min.css" rel="stylesheet"/>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.7/umd/popper.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-size: cover;
+
+            background: url(UserLogin/img/userlogin.jpg) no-repeat fixed center 0;
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            -moz-background-size: cover;
+            -ms-background-size: cover;
+        }
+
+        @media (min-width: 200px) {
+        }
+
+        @media (min-width: 768px) {
+        }
+    </style>
+</head>
+<body class="my-login-page" style="margin-top: 10%">
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center h-100">
+            <div class="card-wrapper">
+                <div class="card fat">
+                    <div class="card-body">
+                        <h4 class="card-title"><span class="badge badge-success">登录</span></h4>
+                        <form method="POST" id="login-form">
+
+                            <div class="form-group">
+                                <label for="username"><span class="badge badge-primary">用户名</span></label>
+
+                                <input id="username" type="text" class="form-control" name="username" required
+                                       autofocus autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password"><span class="badge badge-primary">密码</span>
+                                    <a href="UserLogin/resetPassword.html" class="float-right">
+                                        <span class="badge badge-primary">忘记密码</span>
+                                    </a>
+                                </label>
+                                <input id="password" type="password" class="form-control" name="password" required
+                                       data-eye autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password"><span class="badge badge-primary">请输入验证码</span></label>
+                                <input id="yanzhengma" type="text" class="form-control" name="yanzhengma" required>
+                            </div>
+
+                            <div class="form-group">
+                                <img src="" id="img" style="width:200px;height: 50px" onclick="changeVerification()"
+                                     aria-required="true">
+                                <span>看不清?换一张</span>
+                            </div>
+
+                            <div class="form-group no-margin">
+                                <button class="btn btn-primary btn-block" id="signIn">
+                                    Login
+                                </button>
+                            </div>
+                            <div class="margin-top20 text-center">
+                                没有账户？ <a href="UserLogin/register.html"><span
+                                    class="badge badge-primary">Creat one now!</span></a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="UserLogin/bootstrap/js/bootstrap.min.js"></script>
+<script src="UserLogin/js/user-login.js"></script>
+</body>
+</html>

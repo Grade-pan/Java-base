@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" name="author" content="pxy">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>SWP后台登录</title>
+    <script type="text/javascript" src="JS/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="layui/css/layui.css">
+    <script type="text/javascript" src="layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="CSS/login.css">
+    <script type="text/javascript" src="JS/login.js"></script>
+</head>
+<body>
+<div class="login_main">
+    <div class="layui-carousel lbt" id="loginLbt">
+        <div carousel-item>
+            <div class="item"
+                 style="background: url(layui/images/background/1.jpg) no-repeat; background-size: cover;"></div>
+            <div class="item"
+                 style="background: url(layui/images/background/2.jpg) no-repeat; background-size: cover;"></div>
+        </div>
+    </div>
+    <div class="logo">
+        <img src="layui/images/LOGO/head.png"/>
+        <div>
+            <h1>SWP后台登录</h1>
+            <p>版本号:0.0.0.1</p>
+        </div>
+    </div>
+    <div class="form_tzgg">
+        <div class="form">
+            <form method="post" class="layui-form" id="root-form">
+                <div class="title">管理员登录</div>
+                <div class="con" onclick="getFocus(this)">
+                    <input type="text" name="userName" lay-verify="userName" id="username" placeholder="请输入您的用户名"
+                           autocomplete="off"
+                           class="layui-input">
+                </div>
+                <div class="con" onclick="getFocus(this)">
+                    <input type="password" name="passWord" required lay-verify="passWord" placeholder="请输入您的账户密码"
+                           autocomplete="off" class="layui-input">
+                </div>
+
+                <div class="con" onclick="getFocus(this)">
+                    <input type="text" name="yanzhengma" required lay-verify="yanzhengma" placeholder="请输入验证码"
+                           autocomplete="off" class="layui-input">
+                </div>
+
+
+                <img src="" id="img" onclick="changeVerification()" style="width: 200px;height: 50px">
+                <span>看不清？点击刷新</span>
+
+                <div class="but">
+                    <button class="layui-btn" lay-submit lay-filter="login">登录</button>
+                </div>
+            </form>
+        </div>
+        <script>
+            var verfity = "";
+            window.onload = function () {
+                $.ajax({
+                    url: 'https://www.mxnzp.com/api/verifycode/code?len=6&type=0&app_id=sngmqkqxuln6jkik&app_secret=RVV0aDBJbnpIa2k3REdVQmNuaWI2dz09',//地址
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        $('#img').attr("src", data.data.verifyCodeImgUrl)
+                        verfity = data.data.verifyCode;
+                    }
+                })
+            };
+
+            function changeVerification() {
+                console.log(verfity)
+                $.ajax({
+                    url: 'https://www.mxnzp.com/api/verifycode/code?len=6&type=0&app_id=sngmqkqxuln6jkik&app_secret=RVV0aDBJbnpIa2k3REdVQmNuaWI2dz09',//地址
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        $('#img').attr("src", data.data.verifyCodeImgUrl)
+                        verfity = data.data.verifyCode;
+                    },
+                })
+            }
+
+            layui.use('form', function () {
+                var form = layui.form;
+                form.verify({
+                    userName: function (value, item) {
+                        if (value == null || value == "") {
+                            return '请输入您的用户名！';
+                        }
+                    },
+                    passWord: function (value, item) {
+                        if (value == null || value == "") {
+                            return '请输入您的账户密码！';
+                        }
+                    },
+                    yanzhengma: function (value, item) {
+                        if (value == null || value == "") {
+                            return '请输入验证码！';
+                        }
+                        if (value.toLowerCase() !== verfity.toLowerCase()) {
+                            return '验证码错误';
+                        }
+                    }
+                });
+                form.on('submit(login)', function (data) {
+                    var username = $('#username').val();
+                    $.ajax({
+                        url: 'http://localhost:8080/rootLogin',
+                        data: $('#root-form').serialize(),
+                        dataType: 'json',
+                        type: 'post',
+                        success: function (data) {
+                            if (data.code == "200") {
+                                alert('登录成功');
+                                window.location.href = 'http://localhost:8080/Root/control/index.html'
+                            } else {
+                                alert(data.messages)
+                            }
+                        },
+                        error: function () {
+                            alert(data.messages)
+                        }
+                    });
+                    return false;
+                });
+
+            });
+
+        </script>
+        <div class="tzgg">
+            <div class="title">通知公告</div>
+            <div class="con">
+                <ul>
+                    <li><span>06-01</span><a href="#" target="_blank">...........</a></li>
+                    <li><span>05-26</span><a href="#" target="_blank">...........</a></li>
+                    <li><span>05-23</span><a href="#" target="_blank">...........</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../CSS/css/app.css">
+    <link rel="stylesheet" href="../CSS/css/index.css">
+    <link rel="stylesheet" href="../CSS/css/fonts.css">
+    <script type="text/javascript" src="../JS/timecountdown.js"></script>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+</head>
+<body>
+<div class="wrap" id="wrap">
+    <script type="text/javascript" src="../JS/timecountdown.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            xcsoft.countup('2017-09-12', function (time) {
+                document.getElementById("y2").innerHTML = time.year
+                document.getElementById("d2").innerHTML = time.day
+                document.getElementById("h2").innerHTML = time.hourZero
+                document.getElementById("i2").innerHTML = time.minuteZero
+                document.getElementById("s2").innerHTML = time.secondZero
+            })
+            setInterval(function () {
+                fnDate();
+            });
+        }
+
+        function fnDate() {
+            var time = new Date();
+            document.getElementById("year").innerHTML = time.getFullYear();
+            document.getElementById("month").innerHTML = time.getMonth() + 1;
+            document.getElementById("Date").innerHTML = time.getDate();
+            document.getElementById("hour").innerHTML = time.getHours();
+            document.getElementById("minutes").innerHTML = time.getMinutes();
+            document.getElementById("seconds").innerHTML = time.getSeconds();
+        }
+    </script>
+    <div class="layui-row">
+        <div class="layui-col-md6">
+            <span id="year"></span>
+            <span>年</span>
+            <span id="month"></span>
+            <span>月</span>
+            <span id="Date"></span>
+            <span>日</span>
+            <span id="hour"></span>
+            <span>时</span>
+            <span id="minutes"></span>
+            <span>分</span>
+            <span id="seconds" style="color: red"></span>
+            <span>秒</span>
+        </div>
+        <div class="layui-col-md4">
+            <span>2017</span>
+        </div>
+        <div class="layui-col-md2">
+            <span id="y2"></span>
+            <span>年</span>
+            <span id="d2"></span>
+            <span>天</span>
+            <span id="h2"></span>
+            <span>时</span>
+            <span id="i2"></span>
+            <span>分</span>
+            <span id="s2"></span>
+            <span>秒</span>
+        </div>
+    </div>
+    <div style="float: left;padding-top: 30px;text-align: center;width: 100%;font-weight: bolder;color: #ff6600;">
+    </div>
+    <main>
+        <ul class="ul items">
+            <li>
+                <figure class="effect-jazz">
+                    <img src="../CSS/image/layui.jpg" alt="经典框架|LayUI">
+                    <figcaption>
+                        <h2>
+                            经典框架
+                            <br>
+                            <span>
+                               LayUI
+                            </span>
+                        </h2>
+
+                        <a href="https://www.layui.com" target="_blank"></a>
+                    </figcaption>
+                </figure>
+            </li>
+            <li>
+                <figure class="effect-jazz">
+                    <img src="../CSS/image/bootstrap.png" alt="便捷框架|Bootstrap">
+                    <figcaption>
+                        <h2>
+                            便捷框架
+                            <br>
+                            <span>
+                               Bootstrap
+                            </span>
+                        </h2>
+                        <a href="https://www.bootcss.com/" target="_blank">
+                        </a>
+                    </figcaption>
+                </figure>
+            </li>
+            <li>
+                <figure class="effect-jazz">
+                    <img src="../CSS/image/huawei.png" alt="5G之光|HuaWei5G">
+                    <figcaption>
+                        <h2>
+                            5G之光
+                            <br>
+                            <span>
+                              HuaWei5G
+                            </span>
+                        </h2>
+                        <a href="https://www.huawei.com" target="_blank">
+                        </a>
+                    </figcaption>
+                </figure>
+            </li>
+            <li>
+                <figure class="effect-jazz">
+                    <img src="../CSS/image/fengqiu.png" alt="长寿之乡|FengQiu">
+                    <figcaption>
+                        <h2>
+                            长寿之乡
+                            <br>
+                            <span>
+                                FengQiu
+                            </span>
+                        </h2>
+                        <a href="https://baike.baidu.com/item/%E5%B0%81%E4%B8%98%E5%8E%BF/2549119?fromtitle=%E5%B0%81%E4%B8%98&fromid=166853&fr=aladdin"
+                           target="_blank">
+                        </a>
+                    </figcaption>
+                </figure>
+            </li>
+            <li>
+                <figure class="effect-jazz">
+                    <img src="../CSS/image/ruzhou.png" alt="汝瓷故乡|RuZhou">
+                    <figcaption>
+                        <h2>
+                            汝瓷故乡
+                            <br>
+                            <span>
+                               RuZhou
+                            </span>
+                        </h2>
+                        <a href="https://baike.baidu.com/item/%E6%B1%9D%E5%B7%9E/171615?fr=aladdin" target="_blank">
+                        </a>
+                    </figcaption>
+                </figure>
+            </li>
+            <li>
+                <figure class="effect-jazz">
+                    <img src="../CSS/image/luoyang.png" alt="千年帝都|LuoYang">
+                    <figcaption>
+                        <h2>
+                            千年帝都
+                            <br>
+                            <span>
+                              LuoYang
+                            </span>
+                        </h2>
+                        <a href="https://baike.baidu.com/item/%E6%B4%9B%E9%98%B3/125712?fr=aladdin" target="_blank">
+                        </a>
+                    </figcaption>
+                </figure>
+            </li>
+            <li>
+                <figure class="effect-jazz">
+                    <img src="../CSS/image/baidu.png" alt="AI互联|BaiDuAI">
+                    <figcaption>
+                        <h2>
+                            AI互联
+                            <br>
+                            <span>
+                                BaiDuAI
+                            </span>
+                        </h2>
+                        <a href="https://ai.baidu.com/" target="_blank">
+                        </a>
+                    </figcaption>
+                </figure>
+            </li>
+            <li>
+                <figure class="effect-jazz">
+                    <img src="../CSS/image/qilin.jpg" alt="国芯之光|HISILICON">
+                    <figcaption>
+                        <h2>
+                            国芯之光
+                            <br>
+                            <span>
+                                HISILICON
+                            </span>
+                        </h2>
+                        <a href="http://www.hisilicon.com/" target="_blank">
+                        </a>
+                    </figcaption>
+                </figure>
+            </li>
+            <li>
+                <figure class="effect-jazz">
+                    <img src="../CSS/image/fangzhou.jpg" alt="方舟编译器|OpenarkCompiler">
+                    <figcaption>
+                        <h2>
+                            方舟编译器
+                            <br>
+                            <span>
+                                OpenarkCompiler
+                            </span>
+                        </h2>
+                        <a href="https://www.openarkcompiler.cn/home" target="_blank">
+                        </a>
+                    </figcaption>
+                </figure>
+            </li>
+        </ul>
+    </main>
+</div>
+</body>
+</html>
