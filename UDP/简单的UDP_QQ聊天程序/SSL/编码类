@@ -1,0 +1,35 @@
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.xml.bind.DatatypeConverter;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+public class Cryptography {
+    private static final int BUFSIZE=8192; 
+
+    public static String getHash(String plainText,String hashType) {
+        try {
+            MessageDigest md=MessageDigest.getInstance(hashType);//算法
+            byte[] encryptStr=md.digest(plainText.getBytes("UTF-8"));//摘要
+            return DatatypeConverter.printHexBinary(encryptStr); //16进制字符串
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+            return null;
+        }
+    }
+ 
+    public static SecretKey generateNewKey() {
+        try {
+        
+            KeyGenerator keyGenerator=KeyGenerator.getInstance("AES");
+            keyGenerator.init(128); //128,192,256
+            SecretKey secretKey=keyGenerator.generateKey();//新密钥
+            return secretKey;
+        } catch (NoSuchAlgorithmException ex) {
+            return null;
+        }
+    }
+
+    private Cryptography() {
+    }
+}

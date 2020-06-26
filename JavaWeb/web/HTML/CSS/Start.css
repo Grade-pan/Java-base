@@ -1,0 +1,49 @@
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+a.text:link, a.text:visited {
+    display: block;
+    width: 120px;
+    font-weight: bolder;
+    color: #FFFFFF;
+    background-color: #42f3ff;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+}
+
+a.text:hover, a.text:active {
+    background-color: #cc0000;
+}
+
+.pFirst {
+    position: relative;
+    left: 850px;
+    top: 20px;
+    font-size: 26px;
+    filter: wave(add=0, lightstrength=50, strength=3, frep=2, phrase=10);
+    width: 100%;
+    color: #42f3ff;
+    line-height: 100%;
+    font-family: 华文行楷;
+}
+.pSecond{
+    position : relative;
+    left:600px;
+    top:120px;
+    font-size: 16px;
+    filter: wave(add=0, lightstrength=50, strength=3, frep=2, phrase=10);
+    width: 100%;
+    color: #9effee;
+    line-height: 100%;
+    font-family: 华文行楷
+}

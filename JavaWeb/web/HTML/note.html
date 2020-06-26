@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>云端留言板(1)</title>
+    <style>
+        body {
+            background: url("picture\\wenjuan3.jpg") no-repeat center fixed;
+        <!-- 目的：兼容性 --> -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+<script language="javascript">
+    function print() {
+        var yourName = document.getElementById("test").value;
+        var yourTelephone = document.getElementById("test1").value;
+        var information = document.getElementById("test2").value;
+        var otherName = document.getElementById("test3").value;
+        var otherTelephone = document.getElementById("test4").value;
+        var time = document.getElementById("test5").value;
+        var color = document.getElementById("test6").value;
+
+        var Message = {
+            "yourName": yourName,
+            "yourTelephone": yourTelephone,
+            "information": information,
+            "otherName": otherName,
+            "otherTelephone": otherTelephone,
+            "time": time,
+            "color": color
+        };
+        var MessageJson = JSON.stringify(Message);
+        document.write(MessageJson)
+    }
+</script>
+<form method="post">
+    <fieldset>
+        <legend>提交留言信息</legend>
+        您的姓名:<br>
+        <input type="text" name="yourName" id="test">
+        <br>
+        您的电话:<br>
+        <input type="text" name="yourTelephone " id="test1">
+        <br>
+        留言信息:<br>
+        <input type="text" name="information" id="test2">
+        <br>
+        留言人姓名:<br/>
+        <input type="text" name="otherName" id="test3">
+        <br>
+        留言人电话:<br/>
+        <input type="text" name="otherTelephone" id="test4">
+        <br>
+        留言时间:<br>
+        <input type="date" name="time" id="test5">
+        <br>
+        您喜欢的颜色:<br>
+        <input type="color" name="color" id="test6">
+        <br>
+        <input type="submit" value="提交" onclick="print()">
+    </fieldset>
+</form>
+
+<p>在匆匆远去的时光里，一些人会和我们渐行渐远，一些事情会被我们淡忘。我们会失去一些朋友，又会遇见一些人。
+    那些曾经寄托了我们亲情与友谊的书信、那些承载了我们的光荣与梦想的书信却像一座座纪念碑似的镌满了碑文，屹立在我们走过的人生路上。
+    ——曹含清《怀念书信》</p>
+<p>井边桐叶鸣秋雨，窗下银灯暗晓风。书信茫茫何处问，持竿尽日碧江空。——鱼玄机《情书》</p>
+<form method="get">
+    <fieldset>
+        <legend>查询留言</legend>
+        姓名:<br>
+        <input type="text" name="name">
+        <br>
+        <input type="submit" name="查询">
+    </fieldset>
+</form>
+
+<table style="color: aqua;text-align: center;">
+    <thead>
+    <th>留言人姓名</th>
+    <th>留言人电话</th>
+    <th>留言信息</th>
+    <th>被留言人姓名</th>
+    <th>被留言人电话</th>
+    <th>您喜欢的颜色</th>
+    <th>留言时间</th>
+    </thead>
+    <br>
+    <tbody>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td>4</td>
+    <td>5</td>
+    <td>6</td>
+    <td>7</td>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+package 实验测试;
+
+
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Scanner;
+
+public class Server_1 extends Thread {
+    Socket s;
+
+    public Server_1(Socket s) {
+        super();
+        this.s = s;
+    }
+
+    public void run() {
+        DataInputStream dis = null;
+        String msg = null;
+        InputStream is = null;
+        DataOutputStream dos = null;
+        OutputStream os = null;
+        try {
+            is = s.getInputStream();
+            dis = new DataInputStream(is);
+            msg = dis.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String clientAddress = s.getInetAddress().getHostAddress();
+        String IP_PORT = String.valueOf(s.getPort());
+        System.out.println("客户端ID: " + msg + " IP地址：" + clientAddress + " 端口号：" + IP_PORT + " 连接成功!");
+
+        try {
+            os = s.getOutputStream();
+            dos = new DataOutputStream(os);
+            dos.writeUTF(msg);
+            dos.writeUTF("game");
+            if (msg.equals("game")) {
+                dos.writeUTF(msg + "  " + IP_PORT);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String args[]) {
+        try {
+            ServerSocket ss = new ServerSocket(8080);
+            while (true) {
+                Socket s = ss.accept();
+                new Server_1(s).start();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+package 实验测试;
+
+
+import java.io.*;
+import java.net.Socket;
+
+public class Client_1 {
+    public static void main(String[] args) {
+        int i = 0;
+        DataOutputStream dos = null;
+        OutputStream os = null;
+        DataInputStream dis = null;
+        InputStream is = null;
+        String msg = null;
+        String[] ID_arr = {"孙大炮", "王浩哲", "hello", "game", "socket"};
+
+        try {
+            while (i < 5) {
+                Socket s = new Socket("127.0.0.1", 8080);
+                os = s.getOutputStream();
+                dos = new DataOutputStream(os);
+                dos.writeUTF(ID_arr[i]);
+
+
+                is = s.getInputStream();
+                dis = new DataInputStream(is);
+                String msd = dis.readUTF();
+                String msc=dis.readUTF();
+                if (msd.equals(msc)) {
+                    msg = dis.readUTF();
+                    System.out.println(msg);
+                }
+                i++;
+
+            }
+            os.close();
+            dos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+}
